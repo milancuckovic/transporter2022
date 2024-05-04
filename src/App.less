@@ -1,0 +1,105 @@
+@pozadina:#5EB1FF;
+@bojaTeksta:#1f1f1f;
+@belaBoja: white;
+@aktivan: 'da';
+@neaktivan: 'ne';
+
+.promena(@brzina) when (@brzina > 0){ 
+    transition: all @brzina ease;
+}
+.aktivanlink(@aktivan) when (@aktivan = 'da'){
+    opacity: .8;
+    border-bottom-color: fadeout(@belaBoja, 20%);
+    text-shadow: 0 0 3px @belaBoja; 
+}
+.aktivanlink(@aktivan) when (@aktivan = 'ne'){
+    opacity: .8;
+    text-shadow: 0 0 3px @bojaTeksta; 
+}
+
+.link-aktivan{    
+    &-da{
+        border-bottom: 2px solid @belaBoja;
+        text-shadow: 0 0 3px @bojaTeksta; 
+        box-shadow: 0 0 5px @bojaTeksta;
+        border-radius: 20px 20px 0px 0px;
+        .promena(1s);
+    }
+    &-da:hover{
+        .aktivanlink(@aktivan);
+    }
+    &-ne{
+        border:none;
+        .promena(1s);
+    }
+    &-ne:hover{
+        .aktivanlink(@neaktivan);
+    }
+}
+.bg-custom{
+    background-color: @pozadina;
+}
+.slikaKorisnika{
+    width:100%;
+    height: 120px;
+    object-fit: contain;
+    padding:10px;
+}
+.divZadovoljni{
+    border-radius: 30px;
+    box-shadow: 2px 1px 30px 0px rgb(199, 199, 199);
+    padding:3vh;
+    margin-left: 10%;
+    width: 80%;
+}
+.bi-truck{
+    animation: moveUpDown 1s ease-in-out infinite alternate;
+}
+.listaIsticanja{
+    list-style: none;
+    
+    li{
+        color:@bojaTeksta;
+        padding:2px;
+        p{            
+            
+            opacity: 0;  
+            margin-top: -60px;
+        }
+    }
+    li:hover{
+        color:green;
+        font-weight: bold;
+        cursor: pointer;
+        .promena(1s);
+        p{
+            text-indent: 20px;
+            display:block;
+            color:@bojaTeksta;
+            border-bottom: 1px dotted @bojaTeksta;
+            border-radius: 20px;
+            padding:10px;
+            opacity: 1;
+            margin-top: 0px;
+        }
+    }
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(1px);
+  }
+  100% {
+    transform: translateY(-2px); 
+  }
+}
+@media screen and (max-width: 768px) {
+    .hideBody {
+        display: none;
+    }
+    .divZadovoljni{
+        margin-left: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+}
